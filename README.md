@@ -15,7 +15,7 @@ Faster workflows for ComfyUI users on Mac with Apple silicon
 
  OR 
  
- - In ComfyUI, Manager > Install via Git URL > https://github.com/thoddnn/ComfyUI-MLX.git
+ - In ComfyUI, Manager > Install via Git URL > https://github.com/ramedeiros/comfyui-mlx.git [~~https://github.com/thoddnn/ComfyUI-MLX.git~~]
 
 ## Performances 
 
