@@ -108,6 +108,22 @@ FLUX_DEV = MMDiTConfig(
     dtype=mx.bfloat16,
 )
 
+FLUX_KLEIN_9B = MMDiTConfig(
+    num_heads=32,
+    depth_multimodal=8,
+    depth_unified=24,
+    parallel_mlp_for_unified_blocks=True,
+    hidden_size_override=4096,
+    mlp_ratio=3.0,
+    patchify_via_reshape=True,
+    pos_embed_type=PositionalEncoding.PreSDPARope,
+    rope_axes_dim=(32, 32, 32, 32),
+    pooled_text_embed_dim=768,
+    use_qk_norm=True,
+    float16_dtype=mx.bfloat16,
+    dtype=mx.bfloat16,
+)
+
 
 @dataclass
 class AutoencoderConfig:

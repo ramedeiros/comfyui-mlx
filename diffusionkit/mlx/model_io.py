@@ -50,6 +50,14 @@ _MMDIT = {
         "argmaxinc/mlx-FLUX.1-dev": "flux1-dev.safetensors",
         "vae": "ae.safetensors",
     },
+    "mlx-community/flux2-klein-9b-8bit": {
+        "mlx-community/flux2-klein-9b-8bit": "transformer/model.safetensors",
+        "vae": "vae/model.safetensors",
+    },
+    "mlx-community/flux2-klein-4b-8bit": {
+        "mlx-community/flux2-klein-4b-8bit": "transformer/model.safetensors",
+        "vae": "vae/model.safetensors",
+    },
 }
 _DEFAULT_MODEL = "argmaxinc/stable-diffusion"
 _MODELS = {
@@ -80,6 +88,14 @@ _PREFIX = {
         "vae_decoder": "decoder.",
     },
     "argmaxinc/mlx-FLUX.1-dev": {
+        "vae_encoder": "encoder.",
+        "vae_decoder": "decoder.",
+    },
+    "mlx-community/flux2-klein-9b-8bit": {
+        "vae_encoder": "encoder.",
+        "vae_decoder": "decoder.",
+    },
+    "mlx-community/flux2-klein-4b-8bit": {
         "vae_encoder": "encoder.",
         "vae_decoder": "decoder.",
     },
@@ -703,7 +719,15 @@ def load_flux(
 ):
     """Load the MM-DiT Flux model from the checkpoint file."""
     dtype = _FLOAT16 if float16 else mx.float32
-    config = FLUX_SCHNELL
+
+    # Select config based on model key
+    if "flux2-klein" in key.lower() or "flux2-klein" in model_key.lower():
+        config = FLUX_KLEIN_9B
+    elif "dev" in key.lower() or "dev" in model_key.lower():
+        config = FLUX_DEV
+    else:
+        config = FLUX_SCHNELL
+
     config.low_memory_mode = low_memory_mode
     model = MMDiT(config)
 
